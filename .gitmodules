@@ -1,0 +1,9 @@
+[submodule "src/lib/pink"]
+	path = src/lib/pink
+	url = https://github.com/premek/pink.git
+[submodule "src/lib/suit"]
+	path = src/lib/suit
+	url = https://github.com/vrld/SUIT.git
+[submodule "src/lib/hump"]
+	path = src/lib/hump
+	url = https://github.com/vrld/hump.git

@@ -1,0 +1,31 @@
+# curl -u premysl.vyhnal@gmail.com   -d '{"scopes":["public_repo"],"note":"XXX token name XXX"}'   https://api.github.com/authorizations
+
+
+language: bash
+sudo: false
+install: true
+addons:
+  apt:
+    packages:
+    - lua5.1
+    - python2.7
+script: "./build.sh web"
+deploy:
+  provider: releases
+  skip_cleanup: true
+  api_key:
+    # travis encrypt <token>
+    secure: ruidAIw29XHZQCIWdoNNKZl6EaFsjxO/I1wgi8ElcKxlFw+uVl8mAjdUNrnn33qXH8axinUNGy5QNM7Zse8Iyty/WptvLQqnaSGoGOD/PjQIETnkW4GRVpdsUEY5EjkFWFhge+KQJQa5lYE+F7QKzv47wYDVmYBB2x3W7e19RloSDaJGs7/fL56rAr66CGXYibVIV/M0QBvUL2HfjwGevIGu8YX0+MRWLKhGHPUKcR6jsA9AmyavJXfv+KeiEmSbFpQBYurCI19QFeKztt3cI0aG381ullmCgVk+x+Ejz8mlnvSH1sc3PZ2PxCtS0/qvthPGw+4GpfzERTjG4kNfz0oac5mHlW1l9hrNxdhEjhVloqBFHVwaYJqXYg6cktaQe0tzoi/D9qqRTOw7sxbjhwU+NZMAcBZOcnw7KgM2SFXaRdp+znQNKawfnvd9xpGu8AlIAZ8v4/1ofF7VlQrfQcp5LYi3iGK4xTIQAFx1+r2L1KGwgMEOzBxsV//HrZvTFdWVmTwOKsCJq2UGOAyag9S3MfyLgOOEuxl6O8id3FBx0/2j7LLT1uukqo8/fT8Rq7bEuOfq8YehH6dk49PW15dSTKzS9G/P972IL/RMct12LAqZYnAW59uEtN0tDZ/9twakt0MaXoNZE7Lh+FeKZx+Uif6rzP0X7WTozRBWyPo=
+  file:
+  - target/enjoy.love
+  - target/enjoy-win.zip
+  - target/enjoy-web.zip
+  on:
+    tags: true
+    all_branches: true
+after_success:
+- "[[ -n $TRAVIS_TAG ]] && ./build.sh deploy premek/enjoy"
+env:
+  global:
+   # travis encrypt GH_TOKEN=<token>
+  - secure: R6lRUgY4gphBigptj5AKfYB5cTds/U4hNrSCJkisHYADcn1qQncdqZ8e3ZLJe2w/WFcOhZLVlLsL8k+0T/mQa9fSgzgdQJLrl0Ub0LF+1EbQDnnbfcCxI7mAm10jCVzP1AGuMQql3qO8dgr3UwbvlbFfQNMRS5+HZz7XRBFyyUQyBONs88lZF4CADWK6yYBu/SysmU9uKEjijRWz9BqA4JpHTEvIUooR1siwdlYTnnrepVvDSlq66/LdNs02Gv8erKp22Ehni1EMTpMDQf7lJ5HDJw6tmR1G2sk6ug+lFfSwyGLJbvomQ2C/aMHM1IZxcYbtlET18YEQQww6KNwMHMUir7GaqV8gM1ICLRh5X7deVMxvSgbKSN5Vx8HtM1ZWM4fRSc74dgJ6th7Meo091w2plSdmZfNpDoZZPaV9HFylWB5SJzCESmasOIVZtOgX6i+Jv62ji/n4LqpG91wB61JjfiX2Ubql8d4/43JBMODA9jWy3l+zD4ugkAopIL8p3sTsdgdLBsnfircx9fj+Eu9rRuedaTlfYYEggPur/8zQEXxT0USMoRb15x5ITNMXQGwcI2//l9JBIE+xUCw3/NxWw3s6AENw7NiF23kENyyPaWF6/mKWnOcc191NiR8XhnGAd+qkXguURkAlNrgR/azsK2LNslGPTUpHL/Po7iA=
