@@ -3,6 +3,13 @@
 # Enjoy (working title)
 A game based on a real story
 
+## Clone
+```
+$ git clone https://github.com/premek/enjoy.git
+$ git submodule init
+$ git submodule update
+```
+
 ## Playing
 - [play online](http://premek.github.io/enjoy/)
 - [download](../../releases)
