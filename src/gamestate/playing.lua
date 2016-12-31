@@ -56,7 +56,6 @@ loadRoom("1-1-hallway")
 ----------- love -----------
 
 function p:init()
-  assets.music.play(1)
 end
 
 function p:resume ()
@@ -140,6 +139,7 @@ local function selectChoice(i)
     currentText=story.currentChoices[tonumber(i)].choiceText
     if isEmpty(currentText) then currentText = nil end
     story.chooseChoiceIndex(i)
+    Signal.emit('storychoiceselected', i)
     return i
   end
   return nil
@@ -149,7 +149,10 @@ function p:keypressed(key)
   Signal.emit('key', key)
   if key=='escape' or key=='p' then Signal.emit('pause', true) end
 
-  if key=='space' then currentText=nil end
+  if key=='space' then
+    if currentText ~= nil then Signal.emit('storycontinue') end
+    currentText=nil
+  end
 
   selectChoice(key)
 
@@ -158,7 +161,10 @@ end
 function p:joystickpressed(joystick, button )
   Signal.emit('joystick', joystick, button)
 
-  if not selectChoice(button) then currentText=nil end
+  if not selectChoice(button) then
+    if currentText ~= nil then Signal.emit('') end
+    currentText=nil
+  end
 
 end
 
