@@ -1,5 +1,5 @@
 require "lib.require"
-local pink = require('lib.pink.pink')
+local pink = require 'lib.pink.pink.pink'
 local Signal = require 'lib.hump.signal'
 
 local love=love;
@@ -130,7 +130,7 @@ end
 
 
 Signal.register('roomevent', function(e)
-  if not currentText and e.knot then
+  if not currentText and e.knot and story.state.visitCountAtPathString(e.knot) == 0 then
     story.choosePathString(e.knot)
   end
 end)
