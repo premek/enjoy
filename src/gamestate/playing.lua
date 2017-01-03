@@ -50,7 +50,7 @@ end
 
 
 
-loadRoom("1-1-hallway")
+loadRoom("1-1-basement")
 
 
 ----------- love -----------
@@ -170,6 +170,8 @@ end
 
 
 function p:draw()
+  love.graphics.setCanvas(canvas)
+  love.graphics.clear()
   love.graphics.scale(4)
   love.graphics.setColor(255,255,255)
   for _,o in ipairs(room.objects) do
@@ -177,8 +179,9 @@ function p:draw()
     else love.graphics.draw(assets.img[o.name].img, assets.img[o.name].quads.current, o.x, o.y)
     end
   end
-
   textbox()
+  love.graphics.setCanvas()
+
 
 end
 

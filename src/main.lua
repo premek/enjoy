@@ -10,10 +10,20 @@ local love = love
 
 local state = require.tree("gamestate")
 
+
 function love.load()
   Gamestate.registerEvents()
   Gamestate.switch(state.mainmenu)
   Signal.emit('game_loaded')
+
+
+
+  canvas = love.graphics.newCanvas()
+  local str = love.filesystem.read('CRT.frag')
+  shader = love.graphics.newShader(str)
+  shader:send('inputSize', {love.graphics.getWidth(), love.graphics.getHeight()})
+  shader:send('textureSize', {love.graphics.getWidth(), love.graphics.getHeight()})
+
 end
 
 function love.update(dt)
@@ -21,6 +31,10 @@ function love.update(dt)
 end
 
 function love.draw(dt)
+
+    love.graphics.setShader(shader)
+  love.graphics.draw(canvas)
+    love.graphics.setShader()
 end
 
 function love.keypressed(key)
