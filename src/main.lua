@@ -9,7 +9,7 @@ local Gamestate = require "lib.hump.gamestate"
 local love = love
 
 local state = require.tree("gamestate")
-
+local shader
 
 function love.load()
   Gamestate.registerEvents()
@@ -31,10 +31,9 @@ function love.update(dt)
 end
 
 function love.draw(dt)
-
-    love.graphics.setShader(shader)
+  love.graphics.setShader(shader)
   love.graphics.draw(canvas)
-    love.graphics.setShader()
+  love.graphics.setShader()
 end
 
 function love.keypressed(key)

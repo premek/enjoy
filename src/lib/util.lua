@@ -1,3 +1,7 @@
+
+lg = love.graphics
+lgw, lgh = lg.getWidth(), lg.getHeight()
+
 function isEmpty(s)
   return s==nil or (s:match "^%s*(.-)%s*$") == ''
 end

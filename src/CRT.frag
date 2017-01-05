@@ -40,10 +40,10 @@ extern vec2 textureSize;
 // Controls the intensity of the barrel distortion used to emulate the
 // curvature of a CRT. 0.0 is perfectly flat, 1.0 is annoyingly
 // distorted, higher values are increasingly ridiculous.
-#define distortion 0.3
+#define distortion 0.2
 
 // Simulate a CRT gamma of 2.4.
-#define inputGamma  2.1
+#define inputGamma  2.4
 
 // Compensate for the standard sRGB gamma of 2.2.
 #define outputGamma 2.2

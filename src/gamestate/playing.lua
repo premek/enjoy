@@ -182,7 +182,6 @@ function p:draw()
   textbox()
   love.graphics.setCanvas()
 
-
 end
 
 return p
