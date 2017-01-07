@@ -3,7 +3,7 @@ local suit = require 'lib.suit'
 local assets = require 'assets'
 local love=love
 
-return function (name, updatefn)
+return function (name, updatefn, keypressedfn)
 
 local menu
 
@@ -46,7 +46,7 @@ end
 
 function p:keypressed(key)
   menu:keypressed(key)
-  if key=='escape' then Signal.emit('quit') end
+  if keypressedfn then keypressedfn(key) end
 end
 
 function p:joystickpressed(joystick, button )

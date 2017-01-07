@@ -14,5 +14,11 @@ return require('gamestate._menu')('mainmenu', function (dt, menu)
   if ng.entered or q.entered then Signal.emit('btnentered');  end
   if ng.left or q.left then Signal.emit('btnleft');  end
 
+end,
+
+function (key)
+  if key=='escape' then Signal.emit('quit') end
+  if key=='return' then Signal.emit('newgame') end
 end
+
 )

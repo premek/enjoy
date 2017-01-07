@@ -24,6 +24,10 @@ $ git submodule update
 - https://www.freesound.org/people/creek23/sounds/75250/
 - https://www.freesound.org/people/joedeshon/sounds/266018/
 
+### fonts
+- http://www.dafont.com/futurist-fixed.font
+- https://robey.lag.net/2010/01/23/tiny-monospace-font.html
+
 ### .ase graphics
 - made in [Aseprite](http://www.aseprite.org/) by [myself](https://twitter.com/Premek_V) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
 

@@ -1,6 +1,7 @@
 require "lib.require"
 local pink = require 'lib.pink.pink.pink'
 local Signal = require 'lib.hump.signal'
+local Timer = require 'lib.hump.timer'
 
 local love=love;
 local assets = require 'assets'
@@ -15,21 +16,43 @@ local isQuestion = false
 local rooms = require.tree("rooms")
 local room, controlled
 
-local joystick
-local joysticks = love.joystick.getJoysticks()
-Signal.emit("joysticks_found", #joysticks)
-if #joysticks > 0 then
-  joystick = joysticks[1]
-  Signal.emit("joystick_set", joystick:isGamepad(), joystick:getName(), joystick:getAxes())
+local joystick = require 'joystick'
+
+local fade = {r=0, g=0, b=0, a = 255, inTime=.5, outTime=.9, text=''}
+local interactionDisabled = true
+
+local findObject = function(table, propertyName)
+  for _,o in ipairs(table) do
+    if o[propertyName] then return o end
+  end
 end
 
-local function loadRoom(name)
-  room = rooms[name] or error('Room name "'..name..'" not found')
-  for _,o in ipairs(room.objects) do
-    if o.controlled then controlled = o end
-  end
-  controlled.speed = 0
-  Signal.emit('room_loaded', name)
+local fadeIn  = function () -- make it visible
+  interactionDisabled = false
+  Timer.tween(fade.inTime, fade, {a=0}, 'out-quad')
+end
+
+local fadeOut = function () -- make it black
+  interactionDisabled = true
+  Timer.tween(fade.outTime, fade, {a=255}, 'out-quad')
+end
+
+local function gotoRoom(name)
+  local newRoom = rooms[name] or error('Room name "'..name..'" not found')
+  fade.text = newRoom.intro
+
+  Timer.script(function(wait)
+    fadeOut()
+    wait(fade.outTime)
+
+    room = newRoom
+    controlled = findObject(room.objects, 'controlled')
+    controlled.speed = 0
+    Signal.emit('room_loaded', name)
+
+    wait(string.len(fade.text or '') / 12)
+    fadeIn()
+  end)
 end
 
 local function textbox ()
@@ -50,13 +73,8 @@ local function textbox ()
 end
 
 
-
-loadRoom("1-1-basement")
-
-
------------ love -----------
-
 function p:init()
+  gotoRoom("1-1-basement")
 end
 
 function p:resume ()
@@ -84,12 +102,13 @@ function p:update(dt)
     end
   end
 
+  if not interactionDisabled then
   -- controls
   local axe1H = joystick and joystick:getAxes( ) or 0
   local hatR = joystick and string.find(joystick:getHat( 1 ), "r") and 1 or 0
   local hatL = joystick and string.find(joystick:getHat( 1 ), "l") and 1 or 0
-  local arrR = love.keyboard.isDown("right") and 1 or 0
-  local arrL = love.keyboard.isDown("left") and 1 or 0
+  local arrR = love.keyboard.isDown("right", 'f') and 1 or 0
+  local arrL = love.keyboard.isDown("left", 's') and 1 or 0
 
   local horizontal = axe1H + hatR - hatL + arrR - arrL
 
@@ -105,8 +124,8 @@ function p:update(dt)
   local l = 0
   controlled.x = math.min(r, math.max(l, controlled.x))
 
-  if controlled.x >= r and room.right then loadRoom(room.right) end
-  if controlled.x <= l and room.left  then loadRoom(room.left)  end
+  if controlled.x >= r and room.right then gotoRoom(room.right) end
+  if controlled.x <= l and room.left  then gotoRoom(room.left)  end
 
   for _,o in ipairs(room.objects) do
     if o.speed and o.speed ~= 0 then
@@ -126,6 +145,9 @@ function p:update(dt)
       end
     end
   end
+
+
+  end -- interactionDisabled
 end
 
 
@@ -147,6 +169,8 @@ local function selectChoice(i)
 end
 
 function p:keypressed(key)
+  if interactionDisabled then return end
+
   Signal.emit('key', key)
   if key=='escape' or key=='p' then Signal.emit('pause', true) end
 
@@ -160,6 +184,8 @@ function p:keypressed(key)
 end
 
 function p:joystickpressed(joystick, button )
+  if interactionDisabled then return end
+
   Signal.emit('joystick', joystick, button)
 
   if not selectChoice(button) then
@@ -175,12 +201,25 @@ function p:draw()
   love.graphics.clear()
   love.graphics.scale(4)
   love.graphics.setColor(255,255,255)
-  for _,o in ipairs(room.objects) do
-    if o.noquads then love.graphics.draw(assets.img[o.name].img, o.x, o.y)
-    else love.graphics.draw(assets.img[o.name].img, assets.img[o.name].quads.current, o.x, o.y)
+  if room then
+    for _,o in ipairs(room.objects) do
+      local flip = o.flip and -1 or 1
+      local x = o.flip and o.x+25 or o.x -- fixme
+      if o.noquads then love.graphics.draw(assets.img[o.name].img, x, o.y, 0, flip, 1)
+      else love.graphics.draw(assets.img[o.name].img, assets.img[o.name].quads.current, x, o.y, 0, flip, 1)
+      end
     end
   end
   textbox()
+  love.graphics.setColor(fade.r,fade.g,fade.b,fade.a)
+  lg.rectangle('fill', 0, 0, lgw, lgh)
+
+  if fade.text then
+    love.graphics.setColor(255,255,255,fade.a)
+    lg.setFont(assets.font.dialogs)
+    lg.printf(fade.text, 10, lgh/2-20, lgw-10*2, 'center')
+  end
+
   love.graphics.setCanvas()
 
 end

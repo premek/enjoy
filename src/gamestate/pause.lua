@@ -14,5 +14,9 @@ return require('gamestate._menu')('pause', function (dt, menu)
   if c.entered or q.entered then Signal.emit('btnentered');  end
   if c.left or q.left then Signal.emit('btnleft');  end
 
+end,
+
+function (key)
+  if key=='escape' then Signal.emit('pause', false) end
 end
 )

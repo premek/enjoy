@@ -1,11 +1,11 @@
 ->END // this END shouldnt be needed
 
 === intro
-Hello.                          Press space or any gamepad button to continue.
+Hello.                          Press space to continue.
 This is me.
 * Hi -> my_house
 * Hello -> my_house
-* [Select a number of your choice on the keyboard or gamepad] -> my_house
+* [Select a number of your choice] -> my_house
 
 === my_house
 OK, this is the house where I live.

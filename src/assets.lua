@@ -13,12 +13,15 @@ local a = {
   font = {}
 }
 
+a.volumes = {}
 
 a.music[1] = love.audio.newSource( 'music/Jonas K - Tonight (Original).mp3', 'stream' )
 a.music[1]:setLooping(true)
+a.volumes[1] = 1
 
 a.music[2] = love.audio.newSource( 'music/song_002_r1_session.ogg', 'stream' )
 a.music[2]:setLooping(true)
+a.volumes[2] = .75
 
 a.music.volume = 0
 a.music.fadein = 1.7
@@ -32,7 +35,7 @@ a.music.play = function (i)
     if a.music.current then a.music.current:pause() end
     a.music.current = a.music[i]
     a.music.current:play()
-    Timer.tween(a.music.fadein, a.music, {volume=.85}, 'out-quad')
+    Timer.tween(a.music.fadein, a.music, {volume=a.volumes[i]}, 'out-quad')
   end)
 
   Timer.during(a.music.fadeout + a.music.fadein + .2, function(dt)
