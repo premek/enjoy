@@ -1,12 +1,11 @@
 local Signal = require 'lib.hump.signal'
 
 return require('gamestate._menu')('mainmenu', function (dt, menu)
-
-  menu.layout:reset(lgw/4, 30, 10,10)
-  menu.layout:row(lgw/2, 50.5)
-
+  menu:Label("(ゲーム名を挿入)", menu.layout:row())
   local ng = menu:Button("New game", menu.layout:row())
   local q = menu:Button("Quit", menu.layout:row())
+  menu:Label("メロン 2017", menu.layout:row())
+
 
   if ng.hit then Signal.emit('newgame') end
   if q.hit then Signal.emit('quit') end

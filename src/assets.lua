@@ -76,6 +76,6 @@ end
 
 
 a.font.dialogs = love.graphics.newFont( "font/tom-thumb.bdf", 6 )
-a.font.menu = love.graphics.newFont( 19 )
+a.font.menu = love.graphics.newFont( "font/FUTRFW.TTF", 18 )
 
 return a

@@ -20,6 +20,7 @@
 
     modified by slime73 for use with love2d and mari0
 */
+  extern number time;
 
 extern vec2 inputSize;
 extern vec2 outputSize;
@@ -40,7 +41,7 @@ extern vec2 textureSize;
 // Controls the intensity of the barrel distortion used to emulate the
 // curvature of a CRT. 0.0 is perfectly flat, 1.0 is annoyingly
 // distorted, higher values are increasingly ridiculous.
-#define distortion 0.2
+#define distortion .03
 
 // Simulate a CRT gamma of 2.4.
 #define inputGamma  2.4
@@ -234,5 +235,21 @@ vec4 effect(vec4 vcolor, Image texture, vec2 texCoord, vec2 pixel_coords)
 	mul_res = pow(mul_res, vec3(1.0 / outputGamma));
 
 	// Color the texel.
-	return vec4(mul_res * 1.0, 1.0);
+	//return vec4(mul_res * 1.0, 1.0);
+
+
+  // per row offset
+  float f  = sin( texCoord.y * 320.f * 3.14f );
+  // scale to per pixel
+  float o  = f * (0.35f / 320.f);
+  // scale for subtle effect
+  float s  = f * .03f + 0.97f;
+  // scan line fading
+  float l  = sin( time * 32.f )*.03f + 0.97f;
+  // sample in 3 colour offset
+  float r = Texel( texture, vec2( texCoord.x+o, texCoord.y+o ) ).x * mul_res.r;
+  float g = Texel( texture, vec2( texCoord.x-o, texCoord.y+o ) ).y * mul_res.g;
+  float b = Texel( texture, vec2( texCoord.x  , texCoord.y-o ) ).z * mul_res.b;
+  // combine as
+  return vec4( r, g, b, l ) * s;
 }

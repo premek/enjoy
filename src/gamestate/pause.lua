@@ -2,9 +2,6 @@ local Signal = require 'lib.hump.signal'
 
 return require('gamestate._menu')('pause', function (dt, menu)
 
-  menu.layout:reset(lgw/4, 30, 10,10)
-  menu.layout:row(lgw/2, 50.5)
-
   menu:Label("Paused", menu.layout:row())
 
   local c = menu:Button("Continue", menu.layout:row())

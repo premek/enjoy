@@ -35,16 +35,17 @@ end
 local function textbox ()
   if currentText then
     lg.setFont(assets.font.dialogs)
+    local m = 4
     local w=lgw-7
     local _, lines = lg.getFont():getWrap(currentText, w)
     local h = lg.getFont():getHeight() * #lines + 3
 
     lg.setColor(0,0,0)
-    lg.rectangle('fill', 1,lgh-h-3,lgw-2,h+2)
+    lg.rectangle('fill', m-1,lgh-h-m-1,lgw-2*m+2,h+2)
     lg.setColor(255, 255, 255)
-    lg.rectangle('fill', 2,lgh-h-2,lgw-4,h)
+    lg.rectangle('fill', m,lgh-h-m,lgw-2*m,h)
     lg.setColor(0,0,0)
-    lg.printf(currentText, 4, lgh-h, w, 'left')
+    lg.printf(currentText, m+2, lgh-h-m+2, w, 'left')
   end
 end
 

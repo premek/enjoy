@@ -9,7 +9,7 @@ local Gamestate = require "lib.hump.gamestate"
 local love = love
 
 local state = require.tree("gamestate")
-local shader
+local shader, shader2
 
 function love.load()
   Gamestate.registerEvents()
@@ -21,6 +21,7 @@ function love.load()
   canvas = love.graphics.newCanvas()
   local str = love.filesystem.read('CRT.frag')
   shader = love.graphics.newShader(str)
+
   shader:send('inputSize', {love.graphics.getWidth(), love.graphics.getHeight()})
   shader:send('textureSize', {love.graphics.getWidth(), love.graphics.getHeight()})
 
@@ -28,6 +29,8 @@ end
 
 function love.update(dt)
     Timer.update(dt)
+    shader:send('time', love.timer.getTime( ))
+
 end
 
 function love.draw(dt)

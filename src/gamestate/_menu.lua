@@ -15,14 +15,17 @@ end
 function p:enter ()
   Signal.emit('state_entered', name)
   menu = suit.new()
+
   menu.theme.color = {
-    normal  = {bg = { 66, 6, 66}, fg = {18,188,188}},
-    hovered = {bg = { 120,153,187}, fg = {255,255,255}},
-    active  = {bg = {255,153,  0}, fg = {225,225,225}}
+    normal  = {bg = { 0x9e, 0x86, 0xa6}, fg = {0x53, 0x4c, 0x53}},
+    hovered = {bg = { 0xa0, 0x66, 0x6d}, fg = {0x53, 0x4c, 0x53}},
+    active  = {bg = { 0xa0, 0x66, 0x6d}, fg = {0x53, 0x4c, 0x53}},
   }
 end
 
 function p:update(dt)
+  menu.layout:reset(lgw/6, 30, 10,25)
+  menu.layout:row(lgw/1.5, 35.5)
   updatefn(dt, menu)
 end
 
