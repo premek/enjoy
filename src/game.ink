@@ -44,10 +44,13 @@ Trash can. ->END
 === letter_boxes
 Letter boxes. ->END
 
+=== intro_after_work 8 hours later
 
 === basement_return
 Ok, back from the office. I will just get back to my apartment.
 
+
+=== intro_next_morning Next morning
 
 === day1
 

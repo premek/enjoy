@@ -39,7 +39,12 @@ end
 
 local function gotoRoom(name)
   local newRoom = rooms[name] or error('Room name "'..name..'" not found')
-  fade.text = newRoom.intro
+
+  fade.text = nil
+  if newRoom.intro then
+    story.choosePathString("intro_"..newRoom.intro)
+    fade.text = story.continue()
+  end
 
   Timer.script(function(wait)
     fadeOut()
@@ -74,7 +79,7 @@ end
 
 
 function p:init()
-  gotoRoom("1-1-basement")
+  gotoRoom("2-1-basement")
 end
 
 function p:resume ()

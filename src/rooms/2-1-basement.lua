@@ -6,6 +6,6 @@ return {
   events = {
     {x=120, knot='basement_return'},
   },
-  intro = '8 hours later',
-  left = "2-1-hallway",
+  intro = 'after_work',
+  left = "2-2-hallway",
 }

@@ -14,7 +14,7 @@ local shader, shader2
 
 function love.load()
   Gamestate.registerEvents()
-  Gamestate.switch(state.mainmenu)
+  Gamestate.switch(state.playing)
   Signal.emit('game_loaded')
 
 
