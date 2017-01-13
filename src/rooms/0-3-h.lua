@@ -5,6 +5,7 @@ return {
   },
   events = {
   },
-  left = "3-1-hallway"
+  left = "1-0-h",
+  right = "0-2-b"
 
 }

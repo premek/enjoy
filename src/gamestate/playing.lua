@@ -79,7 +79,7 @@ end
 
 
 function p:init()
-  gotoRoom("2-1-basement")
+  gotoRoom("0-0-start")
 end
 
 function p:resume ()

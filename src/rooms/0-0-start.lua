@@ -5,9 +5,9 @@ return {
   },
   events = {
     {x=10, knot='intro'},
-    {x=30, knot='door1'},
-    {x=60, knot='door2'},
+    {x=40, knot='door1'},
+    {x=100, knot='door2'},
   },
-  right = "1-1-basement"
+  right = "0-1-b"
 
 }

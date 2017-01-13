@@ -1,5 +1,3 @@
-->END // this END shouldnt be needed
-
 === intro
 Hello.                          Press space to continue.
 This is me.
@@ -20,37 +18,34 @@ That's what I will do now, right?
 
 ===walk
 Use arrow keys to walk, ok?
-->END
 
 === door1
 Mr. Neighbourman lives here right next to me.
 I have never seen him.
-->END
 
 === door2
 Mr. Nobody lives in this apartment.
-I have seen him only once.
-But he is inside all the time cooking something good smelling.
-->END
+I have seen him once.
+He is in there all the time cooking something good smelling.
 
 
 
 === basement_intro
 This is the ground floor of our house.
 Nothing interesting here.
-->END
-=== trash_cans
-Trash can. ->END
-=== letter_boxes
-Letter boxes. ->END
+
+=== trash_cans Trash can.
+=== letter_boxes Letter boxes.
 
 === intro_after_work 8 hours later
 
+
 === basement_return
-Ok, back from the office. I will just get back to my apartment.
+Ok, back from the work. I will just get back to my apartment.
 
 
 === intro_next_morning Next morning
+=== palm1 What is this?
 
 === day1
 
@@ -59,7 +54,6 @@ Ok, back from the office. I will just get back to my apartment.
 It was a day like any other.
 I left my apartment in the morning and went to the office.
 
--> END
 
 
 === first_meeting ===

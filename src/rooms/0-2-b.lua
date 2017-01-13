@@ -7,5 +7,5 @@ return {
     {x=120, knot='basement_return'},
   },
   intro = 'after_work',
-  left = "2-2-hallway",
+  left = "0-3-h",
 }

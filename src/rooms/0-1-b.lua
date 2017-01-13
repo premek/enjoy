@@ -12,6 +12,6 @@ return {
     --{x=50, knot='first_meeting'},
     --{x=150, knot='second_meeting'}
   },
-  left = "1-1-hallway",
-  right = "2-1-basement",
+  left = "0-0-start",
+  right = "0-2-b",
 }
