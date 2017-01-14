@@ -7,4 +7,6 @@ return {
   },
   intro = 'after_work',
   left = "99-3-h",
+  left_reset = true,
+
 }

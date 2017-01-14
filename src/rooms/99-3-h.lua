@@ -6,6 +6,7 @@ return {
   events = {
   },
   left = "99-0-h",
+  left_reset = true,
   right = "99-2-b"
 
 }

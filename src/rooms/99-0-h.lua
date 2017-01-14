@@ -6,6 +6,7 @@ return {
   events = {
   },
   intro = "next_day",
-  right = "99-1-b"
+  right = "99-1-b",
+  right_reset = true,
 
 }

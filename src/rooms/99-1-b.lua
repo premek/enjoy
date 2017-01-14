@@ -7,4 +7,6 @@ return {
   },
   left = "99-0-h",
   right = "99-2-b",
+  right_reset = true,
+
 }

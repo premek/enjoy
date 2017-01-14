@@ -8,5 +8,5 @@ return {
     {x=10, knot='first_meeting1'},
     {x=55, knot='first_meeting2'},
   },
-  right = function(story) return story.state.visitCountAtPathString('enjoy') == 0 and '99-2-b' or "6-2-b" end,
+  right = function(story, rooms) return story.state.visitCountAtPathString('enjoy') == 0 and rooms['99-2-b'] or rooms["6-2-b"] end,
 }

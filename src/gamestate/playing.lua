@@ -8,12 +8,16 @@ local assets = require 'assets'
 local story = pink.getStory('game.ink')
 local disableText = false
 
+local start_room = "0-0-start"
+
+
 local p = {}
 local lg = love.graphics
 local lgw, lgh = lg.getWidth()/4, lg.getHeight()/4
 local currentText = nil
 local isQuestion = false
 local rooms = require.tree("rooms")
+local rooms_initial = deepcopy(rooms)
 local room, controlled
 
 local joystick = require 'joystick'
@@ -37,15 +41,22 @@ local fadeOut = function () -- make it black
   Timer.tween(fade.outTime, fade, {a=255}, 'out-quad')
 end
 
-local function gotoRoom(target)
-  local name = target
-  if type(target)=="function" then name = target(story) end
-  local newRoom = deepcopy(rooms[name]) or error('Room name "'..name..'" not found')
+
+local function gotoRoom(target, direction, reset)
+  local newRoom
+
+  if type(target)=="function" then newRoom = target(story, rooms)
+  elseif type(target)=="table" then newRoom = target
+  elseif type(target)=="string" then
+    if reset then rooms[target] = deepcopy(rooms_initial[target]) end
+    newRoom = rooms[target] or error('Room name "'..target..'" not found')
+  end
 
   fade.text = nil
   if newRoom.intro then
     story.choosePathString(newRoom.intro)
     fade.text = story.continue()
+    newRoom.intro = nil -- play intro only once in each room
   end
 
   Timer.script(function(wait)
@@ -55,9 +66,13 @@ local function gotoRoom(target)
     room = newRoom
     controlled = findObject(room.objects, 'controlled')
     controlled.speed = 0
+    -- for when we return to the previosly visited room (we dont want to trigger gotoRoom immediately)
+    if direction == 'left'  then controlled.x = controlled.x-2 end
+    if direction == 'right' then controlled.x = controlled.x+2 end
+
     Signal.emit('room_loaded', name)
 
-    wait(string.len(fade.text or '') / 12)
+    wait(string.len(fade.text or '') / 10)
     fadeIn()
   end)
 end
@@ -81,7 +96,7 @@ end
 
 
 function p:init()
-  gotoRoom("0-0-start")
+  gotoRoom(start_room)
 end
 
 function p:resume ()
@@ -131,8 +146,8 @@ function p:update(dt)
   local l = 0
   controlled.x = math.min(r, math.max(l, controlled.x))
 
-  if controlled.x >= r and room.right then gotoRoom(room.right) end
-  if controlled.x <= l and room.left  then gotoRoom(room.left)  end
+  if controlled.x >= r and room.right then gotoRoom(room.right, 'right', room.right_reset) end
+  if controlled.x <= l and room.left  then gotoRoom(room.left,  'left',  room.left_reset)  end
 
   for _,o in ipairs(room.objects) do
     if o.controlled and o.speed and o.speed ~= 0 then

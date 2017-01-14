@@ -11,6 +11,6 @@ return {
     {x=80, knot='second_meeting'},
   },
   intro = "day7",
-  right = function(story) return story.state.visitCountAtPathString('enjoy') == 0 and '99-1-b' or "7-1-b" end,
+  right = function(story, rooms) return story.state.visitCountAtPathString('second_talk') == 0 and rooms['99-1-b'] or rooms["7-1-b"] end, -- FIXME going into loop
 
 }
