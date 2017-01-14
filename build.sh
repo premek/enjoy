@@ -53,8 +53,8 @@ cd ..
 wget "$LZ" -O "target/love-win.zip"
 unzip -o "target/love-win.zip" -d "target"
 
-tmp=`mktemp -p . -d 2>/dev/null || mktemp -p . -d -t 'mytmpdir'`
-mkdir "$tmp/$P"
+tmp=tmp
+mkdir -p "$tmp/$P"
 cat "target/love-${LV}-win32/love.exe" "target/${P}.love" > "$tmp/${P}/${P}.exe"
 cp  target/love-"${LV}"-win32/*dll target/love-"${LV}"-win32/license* "$tmp/$P"
 cd "$tmp"
