@@ -1,6 +1,8 @@
 local Signal = require 'lib.hump.signal'
 
-return require('gamestate._menu')('pause', function (dt, menu)
+return require('gamestate._menu')(
+'pause',
+function (dt, menu)
 
   menu:Label("Paused", menu.layout:row())
 

@@ -8,6 +8,7 @@ return {
     {x=40, knot='door1'},
     {x=100, knot='door2'},
   },
+  intro = "day0",
   right = "0-1-b"
 
 }

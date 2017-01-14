@@ -37,12 +37,14 @@ local fadeOut = function () -- make it black
   Timer.tween(fade.outTime, fade, {a=255}, 'out-quad')
 end
 
-local function gotoRoom(name)
-  local newRoom = rooms[name] or error('Room name "'..name..'" not found')
+local function gotoRoom(target)
+  local name = target
+  if type(target)=="function" then name = target(story) end
+  local newRoom = deepcopy(rooms[name]) or error('Room name "'..name..'" not found')
 
   fade.text = nil
   if newRoom.intro then
-    story.choosePathString("intro_"..newRoom.intro)
+    story.choosePathString(newRoom.intro)
     fade.text = story.continue()
   end
 
@@ -79,7 +81,7 @@ end
 
 
 function p:init()
-  gotoRoom("0-0-start")
+  gotoRoom('7-3-h')--"0-0-start")
 end
 
 function p:resume ()
@@ -133,9 +135,12 @@ function p:update(dt)
   if controlled.x <= l and room.left  then gotoRoom(room.left)  end
 
   for _,o in ipairs(room.objects) do
-    if o.speed and o.speed ~= 0 then
-      assets.img[o.name].quads.current = assets.img[o.name].quads[math.floor(math.max(0,math.min(#assets.img[o.name].quads-1,o.x/5%#assets.img[o.name].quads)))]
+    if o.controlled and o.speed and o.speed ~= 0 then
+      assets.img[o.name].quads.current = assets.img[o.name].quads[math.floor(math.max(0,math.min(#assets.img[o.name].quads-1, o.x/5%#assets.img[o.name].quads)))]
+    elseif o.name == 'neighbour' then
+      assets.img[o.name].quads.current = assets.img[o.name].quads[math.floor(math.max(0,math.min(#assets.img[o.name].quads-1, (controlled.x-30)/10)))]
     end
+
   end
 
   if room.events then
@@ -157,10 +162,11 @@ end
 
 
 Signal.register('roomevent', function(e)
-  if not currentText and e.knot and story.state.visitCountAtPathString(e.knot) == 0 then
+  if not currentText and e.knot and (e.repeatable or story.state.visitCountAtPathString(e.knot) == 0) then
     story.choosePathString(e.knot)
   end
 end)
+
 
 local function selectChoice(i)
   if isQuestion and tonumber(i) and story.currentChoices[tonumber(i)] then

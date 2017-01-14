@@ -4,8 +4,9 @@ return {
     {name="me", x=10, y=17, controlled=true}
   },
   events = {
+    {x=25, knot='liveshere'},
   },
-  intro = "day1",
-  right = "1-1-b"
+  intro = "day4",
+  right = "4-1-b"
 
 }

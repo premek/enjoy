@@ -5,7 +5,7 @@ return {
   },
   events = {
   },
-  intro = "day1",
-  right = "1-1-b"
+  intro = "day2",
+  right = "2-1-b"
 
 }

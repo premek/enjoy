@@ -1,3 +1,7 @@
+// DAY 0
+
+=== day0 Friday, May 3, 2006
+
 === intro
 Hello.                          Press space to continue.
 This is me.
@@ -37,47 +41,94 @@ Nothing interesting here.
 === trash_cans Trash can.
 === letter_boxes Letter boxes.
 
-=== intro_after_work 8 hours later
+=== after_work 8 hours later
 
 
 === basement_return
 Ok, back from the work. I will just get back to my apartment.
 
 
-=== intro_next_morning Next morning
+=== day1 Monday, May 4, 2006
+=== day2 Tuesday, May 5, 2006
+=== day3 Wednesday, May 6, 2006
+
+=== everyday It is the same every day...
+
+
+=== day4 Thursday, May 7, 2006
+=== liveshere I wonder if someone even lives here...
+
+
+=== day5 Friday, May 8, 2006
+=== carrynothing Did you notice I never carry anything with me to my work?
+
+
+
+
+=== day6 Monday, May 9, 2006
+
+=== door_open
+There is something going on...
+* [He's probably just cleaning.]
+* [Maybe he's moving out.]
+
 === palm1 What is this?
 
-=== day1
+=== first_meeting1 ===
+Oh this must be the guy living in the apartment next to me...
 
-(Monday May 9th, 2016)
+=== first_meeting2 ===
+"Morning"
+* [...]He looked weird
+  I left without talking to him. ->END
+* "Morning"[], I replied. ->enjoy
 
-It was a day like any other.
-I left my apartment in the morning and went to the office.
+==== enjoy ====
+"Enjoy your day," he said to me.
+"And enjoy your life!" he shouted at me as I was leaving.
+* [...]
+* ["Thank you"]
 
 
 
-=== first_meeting ===
-This must be the guy living in the apartment next to yours.
-"Morning", he said.
-* [...]He looks weird
-  I left without talking to him.
-* "Morning"[], I replied.
-  "Enjoy your day," he said to me,
-  "And enjoy your life!" he shouted at me as I was leaving
+=== glad_to_meet_him
+I'm glad I met my neighbour this morning. He is a nice guy.
+
+=== palm2 ?
+
+
+
+=== day7 Tuesday, May 10, 2006
 
 === second_meeting ===
-Can I ask you a question?
-* [Try to avoid talking to him]"Sorry I'm in a hurry"
-* [Yes]Sure
-  Do you know what is going on here?
-* * Like in this house?
-* * No
-    You know, I'm in in a movie.
-    And it doesn't look good for me.
-    Can you help me?
-* * * Of course
-* * * How?
-      Mom, dad, brother, I'm so sorry.
-      You know, I'd like to be with my family.
-      With my mom, my dad and brother.
-      Right now.
+"Hello, can I ask you something?"
+* [Try to avoid talking to him]"Sorry I'm in a hurry" ->END
+* [Yes]"Sure." ->second_talk
+
+=== second_talk
+
+"Do you know what is going on here?"
+* [Here?]"Where? In this house?" ->game
+* [No]"No" ->game
+
+=== game
+  "You know, I'm in a video game."
+  "And it doesn't look good for me."
+  "Can you help me?"
+* [Yes]"Of course" ->fam
+* [How?]"I don't know how to help you"->fam
+=== fam
+    ...
+    ...
+    "Mom, dad, I'm sorry."
+    "You know, I'd like to be with my family. With my mom, dad and my brother."
+    "Right now."
+* [I don't know what to say]...
+"I know, I have to help myself first."
+"Bye"
+
+
+
+
+
+=== next_day Next morning
