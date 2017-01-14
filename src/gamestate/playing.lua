@@ -81,7 +81,7 @@ end
 
 
 function p:init()
-  gotoRoom('7-3-h')--"0-0-start")
+  gotoRoom("0-0-start")
 end
 
 function p:resume ()

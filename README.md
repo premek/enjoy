@@ -1,35 +1,36 @@
 [![autobuild status](https://travis-ci.org/premek/enjoy.svg)](https://travis-ci.org/premek/enjoy)
 
-# Enjoy (working title)
-A game based on a real story
+# Enjoy your life
+A game (maybe) based on a real story
 
-## Clone
+
+### Playing
+- [play online](http://premek.github.io/enjoy/)
+- [download](../../releases)
+
+## Downloading the code
 ```
 $ git clone https://github.com/premek/enjoy.git
 $ git submodule init
 $ git submodule update
 ```
 
-## Playing
-- [play online](http://premek.github.io/enjoy/)
-- [download](../../releases)
+### Credits
 
-## Credits
+#### soundtrack
+ - [Jonas K - Tonight](https://soundcloud.com/jonask1988/jonas-k-tonight) (edited)
+ - [Bart Van Audenhove](https://soundcloud.com/tarbolovanolo/song-002-lullaby-loop-free-download-cc-by) (edited)
 
-### soundtrack
- - [Jonas K - Tonight](https://soundcloud.com/jonask1988/jonas-k-tonight)
- - [Bart Van Audenhove](https://soundcloud.com/tarbolovanolo/song-002-lullaby-loop-free-download-cc-by)
-
-### sfx
+#### sfx
 - https://www.freesound.org/people/creek23/sounds/75250/
 - https://www.freesound.org/people/joedeshon/sounds/266018/
 
-### fonts
+#### fonts
 - http://www.dafont.com/futurist-fixed.font
 - https://robey.lag.net/2010/01/23/tiny-monospace-font.html
 
-### .ase graphics
-- made in [Aseprite](http://www.aseprite.org/) by [myself](https://twitter.com/Premek_V) under [CC0](https://creativecommons.org/publicdomain/zero/1.0/)
+#### graphics
+- made in [Aseprite](http://www.aseprite.org/) by [myself](https://twitter.com/Premek_V) ([CC0](https://creativecommons.org/publicdomain/zero/1.0/))
 
-### code
-- Written by [me](https://twitter.com/Premek_V) in Lua and [LÖVE](https://love2d.org/) & released under the [MIT License](https://opensource.org/licenses/MIT)
+#### code
+- Written by [me](https://twitter.com/Premek_V) in Lua using [LÖVE](https://love2d.org/) & released under the [MIT License](https://opensource.org/licenses/MIT)
