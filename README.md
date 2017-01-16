@@ -4,9 +4,11 @@
 A game (maybe) based on a real story
 
 
-### Playing
-- [play online](http://premek.github.io/enjoy/)
-- [download](../../releases)
+**[Download here](../../releases)**
+
+On windows download enjoy-win.zip, unpack and run the .exe. On linux/mac you will need [LÖVE](https://love2d.org/) installed and then download the .love file and double click it or run with `love enjoy.love`.
+
+[Web version](http://premek.github.io/enjoy/) not working yet.
 
 ## Downloading the code
 ```
