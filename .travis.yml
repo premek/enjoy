@@ -9,12 +9,16 @@ addons:
     packages:
     - lua5.1
     - python2.7
+    - luarocks
+before_install:
+  - luarocks install --local lpeg
+  
 script: "./build.sh web"
 deploy:
   provider: releases
   skip_cleanup: true
   api_key:
-    # travis encrypt <token>
+    # travis encrypt <token> 
     secure: 2YJ2wzS9qRNrb2UMxsLlYoa6yR+h/9dWgMkLP9xUvy9tZ/Uheg5KKlrBESFd+Bz2hxjXgmoy5avEpmPLFyRF15nPW47QXbyIU0ambIALycU0cqPTzqu7uFjxSbPu7/AbT8p6jHnKpeGu3oYkDsxA3f0nRcZxJm9azcgSbMDQFlFZyVTZtCqMqVu7uVnFfbMw9EZRz6ldj/zd9TGnkECtnnx+hH2Xx3maozfsVXPJmZpRST+NfBbPqspOgPYNuxK7KKd4oBnpW3wKvMTFfnlpWmXhK9ahs/WGYfda8Xg262s25fqR/kTvnZWiVZaULL5M7Uax5xiIyU785scKJYrMkVATGss033pLhW9trXG874SHMWeozYnjemzACC0e0cLgBUpElR+M86u2R/zNA8ZHUwdrTf9TllEV6uV8yHkBxXK6ahl5ocyaYXSN/ezkzyeMstJeGLR6/TN3d3XLTfilEcsBOGJNNfACJtnnr5K7NcgyA2jVWUDF/NMyZlpQgU2TiW1SUwJG7rV5SaW0pXp1NCnH8v/HGqSzacEFzpsdhSPjqg6RGQ/SefhAZwD4COUdTzERfSJGs74xROPVKrMtmqQ56qIbhBWh6GQ0NzRTACw1wM2+skZKxekxc5xEjGZEdtgwedheaJISKSvFRbDZekZtX3+YCHOnTgMG/WYt52s=
   file:
   - target/enjoy.love
