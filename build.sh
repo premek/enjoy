@@ -16,7 +16,7 @@ if [ "$1" == "clean" ]; then
 fi
 
 
-### deploy
+### deploy web version to github pages
 
 if [ "$1" == "deploy" ]; then
  # $2 = premek/forest
@@ -44,13 +44,19 @@ mkdir "target"
 
 ### .love
 
-cd src
-zip -9 -r - . > "../target/${P}.love"
-cd ..
+cp -r src target	
+cd target/src
+
+# compile .ink story into lua table so the runtime will not need lpeg dep.
+lua lib/pink/pink/pink.lua parse game.ink > game.lua
+
+zip -9 -r - . > "../${P}.love"
+cd -
 
 ### .exe
 
-wget "$LZ" -O "target/love-win.zip"
+if [ ! -f "target/love-win.zip" ]; then wget "$LZ" -O "target/love-win.zip"; fi
+#cp ~/downloads/love-0.10.1-win32.zip "target/love-win.zip"
 unzip -o "target/love-win.zip" -d "target"
 
 tmp="target/tmp/"
@@ -76,8 +82,8 @@ git checkout 6fa910c2a28936c3ec4eaafb014405a765382e08
 git submodule update --init --recursive
 
 cd release-compatibility
-python ../emscripten/tools/file_packager.py game.data --preload ../../../src/@/ --js-output=game.js
-python ../emscripten/tools/file_packager.py game.data --preload ../../../src/@/ --js-output=game.js
+python ../emscripten/tools/file_packager.py game.data --preload ../../../target/src/@/ --js-output=game.js
+python ../emscripten/tools/file_packager.py game.data --preload ../../../target/src/@/ --js-output=game.js
 #yes, two times!
 # python -m SimpleHTTPServer 8000
 cd ../..
