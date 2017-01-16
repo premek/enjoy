@@ -14,7 +14,7 @@ before_install:
   - luarocks install --local lpeg
   - "`luarocks path`" # execute the luarocks output - sets the paths for 'local' tree
   
-script: "./build.sh web"
+script: "[[ -n $TRAVIS_TAG ]] && ./build.sh web || ./build.sh" # web only for tags
 deploy:
   provider: releases
   skip_cleanup: true
