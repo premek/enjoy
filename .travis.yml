@@ -29,7 +29,7 @@ deploy:
     tags: true
     all_branches: true
 after_success:
-- "[[ -n $TRAVIS_TAG ]] && ./build.sh deploy premek/enjoy"
+- "[[ -n $TRAVIS_TAG ]] && ./build.sh deploy $TRAVIS_REPO_SLUG"
 env:
   global:
    # travis encrypt GH_TOKEN=<token>
