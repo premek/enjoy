@@ -4,7 +4,7 @@ set -x
 
 P="enjoy"
 
-LV="0.10.1"
+LV="0.10.2"
 LZ="https://bitbucket.org/rude/love/downloads/love-${LV}-win32.zip"
 
 
@@ -44,7 +44,7 @@ mkdir "target"
 
 ### .love
 
-cp -r src target	
+cp -r src target
 cd target/src
 
 # compile .ink story into lua table so the runtime will not need lpeg dep.
