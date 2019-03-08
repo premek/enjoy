@@ -25,7 +25,7 @@ function require.tree(requirePath)
 
     for _,entry in ipairs(entries) do
       fsPath = toFSPath(requirePath .. '.' .. entry)
-      if lfs.isDirectory(fsPath) then
+      if lfs.getInfo(fsPath, 'directory') then
         result[entry] = require.tree(toRequirePath(fsPath))
       else
         entry = noExtension(entry)

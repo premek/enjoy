@@ -17,9 +17,9 @@ function p:enter ()
   menu = suit.new()
 
   menu.theme.color = {
-    normal  = {bg = { 0x9e, 0x86, 0xa6}, fg = {0x53, 0x4c, 0x53}},
-    hovered = {bg = { 0xa0, 0x66, 0x6d}, fg = {0x53, 0x4c, 0x53}},
-    active  = {bg = { 0xa0, 0x66, 0x6d}, fg = {0x53, 0x4c, 0x53}},
+    normal  = {bg = { 0x9e/255, 0x86/255, 0xa6/255}, fg = {0x53/255, 0x4c/255, 0x53/255}},
+    hovered = {bg = { 0xa0/255, 0x66/255, 0x6d/255}, fg = {0x53/255, 0x4c/255, 0x53/255}},
+    active  = {bg = { 0xa0/255, 0x66/255, 0x6d/255}, fg = {0x53/255, 0x4c/255, 0x53/255}},
   }
 end
 
@@ -32,7 +32,7 @@ end
 function p:draw()
   love.graphics.setCanvas(canvas)
   love.graphics.clear()
-  love.graphics.setColor(0xd1, 0xcc, 0xd2)
+  love.graphics.setColor(0xd1/255, 0xcc/255, 0xd2/255)
   lg.rectangle('fill', 0,0, lgw, lgh)
   love.graphics.setFont(assets.font.menu)
   menu:draw()

@@ -9,7 +9,7 @@ local Gamestate = require "lib.hump.gamestate"
 local love = love
 
 local state = require.tree("gamestate")
-local shader, shader2
+--local shader, shader2
 
 
 function love.load()
@@ -20,24 +20,24 @@ function love.load()
 
 
   canvas = love.graphics.newCanvas()
-  local str = love.filesystem.read('CRT.frag')
-  shader = love.graphics.newShader(str)
+  --local str = love.filesystem.read('CRT.frag')
+  --shader = love.graphics.newShader(str)
 
-  shader:send('inputSize', {love.graphics.getWidth(), love.graphics.getHeight()})
-  shader:send('textureSize', {love.graphics.getWidth(), love.graphics.getHeight()})
+  --shader:send('inputSize', {love.graphics.getWidth(), love.graphics.getHeight()})
+  --shader:send('textureSize', {love.graphics.getWidth(), love.graphics.getHeight()})
 
 end
 
 function love.update(dt)
     Timer.update(dt)
-    shader:send('time', love.timer.getTime( ))
+    --shader:send('time', love.timer.getTime( ))
 
 end
 
 function love.draw(dt)
-  love.graphics.setShader(shader)
+  --love.graphics.setShader(shader)
   love.graphics.draw(canvas)
-  love.graphics.setShader()
+  --love.graphics.setShader()
 end
 
 function love.keypressed(key)

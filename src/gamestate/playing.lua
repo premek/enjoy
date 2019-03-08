@@ -22,7 +22,7 @@ local room, controlled
 
 local joystick = require 'joystick'
 
-local fade = {r=0, g=0, b=0, a = 255, inTime=.5, outTime=.9, text=''}
+local fade = {r=0, g=0, b=0, a = 1, inTime=0.5, outTime=0.9, text=''}
 local interactionDisabled = true
 
 local findObject = function(table, propertyName)
@@ -38,7 +38,7 @@ end
 
 local fadeOut = function () -- make it black
   interactionDisabled = true
-  Timer.tween(fade.outTime, fade, {a=255}, 'out-quad')
+  Timer.tween(fade.outTime, fade, {a=1}, 'out-quad')
 end
 
 
@@ -87,7 +87,7 @@ local function textbox ()
 
     lg.setColor(0,0,0)
     lg.rectangle('fill', m-1,lgh-h-m-1,lgw-2*m+2,h+2)
-    lg.setColor(255, 255, 255)
+    lg.setColor(1, 1, 1)
     lg.rectangle('fill', m,lgh-h-m,lgw-2*m,h)
     lg.setColor(0,0,0)
     lg.printf(currentText, m+2, lgh-h-m+2, w, 'left')
@@ -223,10 +223,9 @@ end
 
 
 function p:draw()
-  love.graphics.setCanvas(canvas)
   love.graphics.clear()
   love.graphics.scale(4)
-  love.graphics.setColor(255,255,255)
+  love.graphics.setColor(1,1,1)
   if room then
     for _,o in ipairs(room.objects) do
       local flip = o.flip and -1 or 1
@@ -241,12 +240,11 @@ function p:draw()
   lg.rectangle('fill', 0, 0, lgw, lgh)
 
   if fade.text then
-    love.graphics.setColor(255,255,255,fade.a)
+    love.graphics.setColor(1,1,1,fade.a)
     lg.setFont(assets.font.dialogs)
     lg.printf(fade.text, 10, lgh/2-20, lgw-10*2, 'center')
   end
 
-  love.graphics.setCanvas()
 
 end
 
