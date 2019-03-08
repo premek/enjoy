@@ -1,6 +1,6 @@
 // DAY 0
 
-=== day0 Friday, May 3, 2006
+=== day0 Friday, April 29, 2006
 
 === intro
 Hello.                          Press space to continue.
@@ -48,18 +48,18 @@ Nothing interesting here.
 Ok, back from the work. I will just get back to my apartment.
 
 
-=== day1 Monday, May 4, 2006
-=== day2 Tuesday, May 5, 2006
-=== day3 Wednesday, May 6, 2006
+=== day1 Monday, May 2, 2006
+=== day2 Tuesday, May 3, 2006
+=== day3 Wednesday, May 4, 2006
 
 === everyday It is the same every day...
 
 
-=== day4 Thursday, May 7, 2006
+=== day4 Thursday, May 5, 2006
 === liveshere I wonder if someone even lives here...
 
 
-=== day5 Friday, May 8, 2006
+=== day5 Friday, May 6, 2006
 === carrynothing Did you notice I never carry anything with me to my work?
 
 
