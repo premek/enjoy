@@ -12,9 +12,7 @@ On windows download enjoy-win.zip, unpack and run the .exe. On linux/mac you wil
 
 ## Downloading the code
 ```
-$ git clone https://github.com/premek/enjoy.git
-$ git submodule init
-$ git submodule update
+$ git clone --recurse-submodules https://github.com/premek/enjoy.git
 ```
 
 ### Credits
