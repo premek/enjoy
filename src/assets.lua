@@ -50,7 +50,7 @@ end
 for _,v in ipairs(love.filesystem.getDirectoryItems("sfx")) do
   local k = v:match("^(.+)%..+$")
   a.sfx[k] = love.audio.newSource("sfx/"..v, "static")
-  a.sfx[k]:setVolume(0.9)
+  a.sfx[k]:setVolume(0.2)
 end
 --for _,v in ipairs({"idle", "going"}) do sfx[v]:setLooping(true) end
 --sfx.radiofm:setVolume(1)
