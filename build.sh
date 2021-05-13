@@ -76,18 +76,16 @@ if [ "$1" == "web" ]; then
 
 cd target
 rm -rf love.js *-web*
-git clone https://github.com/TannerRogalsky/love.js.git
-cd love.js
-git checkout 6fa910c2a28936c3ec4eaafb014405a765382e08
-git submodule update --init --recursive
+npm i love.js
+mem=$((`stat --printf="%s" "$P.love"` + 8000000)) # not sure about this, it just needs to be big enough
+npx love.js --memory $mem --title "$P" "$P.love" "$P-web"
+echo "footer, h1 {display:none} body{background:#222}" > "$P-web/theme/love.css"
 
-cd release-compatibility
-python ../emscripten/tools/file_packager.py game.data --preload ../../../target/src/@/ --js-output=game.js
-python ../emscripten/tools/file_packager.py game.data --preload ../../../target/src/@/ --js-output=game.js
-#yes, two times!
-# python -m SimpleHTTPServer 8000
-cd ../..
-cp -r love.js/release-compatibility "$P-web"
 zip -9 -r - "$P-web" > "${P}-web.zip"
 # target/$P-web/ goes to webserver
+
+  if [ "$2" == "run" ]; then
+    cd "$P-web"
+    python3 -m http.server
+  fi
 fi
