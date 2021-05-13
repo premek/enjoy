@@ -12,21 +12,26 @@ addons:
     - npm
 script: "[[ -n $TRAVIS_TAG ]] && ./build.sh web || ./build.sh" # web only for tags
 deploy:
-  provider: releases
-  skip_cleanup: true
-  api_key:
-    # travis encrypt <token> 
-    secure: 2YJ2wzS9qRNrb2UMxsLlYoa6yR+h/9dWgMkLP9xUvy9tZ/Uheg5KKlrBESFd+Bz2hxjXgmoy5avEpmPLFyRF15nPW47QXbyIU0ambIALycU0cqPTzqu7uFjxSbPu7/AbT8p6jHnKpeGu3oYkDsxA3f0nRcZxJm9azcgSbMDQFlFZyVTZtCqMqVu7uVnFfbMw9EZRz6ldj/zd9TGnkECtnnx+hH2Xx3maozfsVXPJmZpRST+NfBbPqspOgPYNuxK7KKd4oBnpW3wKvMTFfnlpWmXhK9ahs/WGYfda8Xg262s25fqR/kTvnZWiVZaULL5M7Uax5xiIyU785scKJYrMkVATGss033pLhW9trXG874SHMWeozYnjemzACC0e0cLgBUpElR+M86u2R/zNA8ZHUwdrTf9TllEV6uV8yHkBxXK6ahl5ocyaYXSN/ezkzyeMstJeGLR6/TN3d3XLTfilEcsBOGJNNfACJtnnr5K7NcgyA2jVWUDF/NMyZlpQgU2TiW1SUwJG7rV5SaW0pXp1NCnH8v/HGqSzacEFzpsdhSPjqg6RGQ/SefhAZwD4COUdTzERfSJGs74xROPVKrMtmqQ56qIbhBWh6GQ0NzRTACw1wM2+skZKxekxc5xEjGZEdtgwedheaJISKSvFRbDZekZtX3+YCHOnTgMG/WYt52s=
-  file:
-  - target/enjoy.love
-  - target/enjoy-win.zip
-  - target/enjoy-web.zip
-  on:
-    tags: true
-    all_branches: true
-after_success:
-- "[[ -n $TRAVIS_TAG ]] && ./build.sh deploy $TRAVIS_REPO_SLUG"
+  - provider: releases
+    skip_cleanup: true
+    api_key:
+      # travis encrypt <token> 
+      secure: 2YJ2wzS9qRNrb2UMxsLlYoa6yR+h/9dWgMkLP9xUvy9tZ/Uheg5KKlrBESFd+Bz2hxjXgmoy5avEpmPLFyRF15nPW47QXbyIU0ambIALycU0cqPTzqu7uFjxSbPu7/AbT8p6jHnKpeGu3oYkDsxA3f0nRcZxJm9azcgSbMDQFlFZyVTZtCqMqVu7uVnFfbMw9EZRz6ldj/zd9TGnkECtnnx+hH2Xx3maozfsVXPJmZpRST+NfBbPqspOgPYNuxK7KKd4oBnpW3wKvMTFfnlpWmXhK9ahs/WGYfda8Xg262s25fqR/kTvnZWiVZaULL5M7Uax5xiIyU785scKJYrMkVATGss033pLhW9trXG874SHMWeozYnjemzACC0e0cLgBUpElR+M86u2R/zNA8ZHUwdrTf9TllEV6uV8yHkBxXK6ahl5ocyaYXSN/ezkzyeMstJeGLR6/TN3d3XLTfilEcsBOGJNNfACJtnnr5K7NcgyA2jVWUDF/NMyZlpQgU2TiW1SUwJG7rV5SaW0pXp1NCnH8v/HGqSzacEFzpsdhSPjqg6RGQ/SefhAZwD4COUdTzERfSJGs74xROPVKrMtmqQ56qIbhBWh6GQ0NzRTACw1wM2+skZKxekxc5xEjGZEdtgwedheaJISKSvFRbDZekZtX3+YCHOnTgMG/WYt52s=
+    file:
+    - target/enjoy.love
+    - target/enjoy-win.zip
+    - target/enjoy-web.zip
+    on:
+      tags: true
+      all_branches: true
+  - provider: pages
+    skip_cleanup: true
+    github_token: $GITHUB_TOKEN
+    on:
+      tags: true
+      all_branches: true
 env:
   global:
-   # travis encrypt GH_TOKEN=<token>
-  - secure: ddpt+AFQ2nVBDaYXmODCsnwbUPyhBSN1VRwvrAzXnbgBAMGKs57tW+N4NBGQF6v32AX7G+LO4qjPumJ2f21SMH3AsPCNONzzA/kp/343oXqojVFZMyEfaE3tQOwvGteLF7RRF4AN+eTFrVEqb+ttn9ttu5yzdG0gyRt0p45bgtdGX+3S+B764nsf8jlbBaCSWM17alICW/NOefQiylNsrwRs0nR/pnUWXy+byAA2pUa3chDz4Kt6+SC5qyAD03Xap819n7IJrmejH42iAopFCpnDRCcfIh5eICp3m/cwnpwmDlH+4lkxfLPs8ZTFFkgdQKzYH8iQ9V/F9swez628oxilRR8e72e+PUCEyUdifX5XW9LqwDeQiKjbqq3/L+89EZYlxz7WtHMqAaLBXW0gGnqYnVAk0kXHbK4y1NVbUHv1TRMq1aznzXBtrsSOAaH8e4sqYx2rcZTYm1nqCleFBtQdcDL/6fTFjU6FY+g+gKfhx39YGgBBfLVDGqQ6yJ49PRJUvl1fvw4WCTdcO0YAlWk9v3AyhMiTspxavgmvZp3BpCnlJu7Ve0k9Tmf4gyVmow1D/Zgz6jMD47Gtad91aSy9LDrAUP70ywAwtVfgPoMNEh/6+brwAImNNZ2L6icvFz30nhIFUqR5Aiwy0PawcDJpXO0QXGmWRRIznLuvhAo=
+   # travis encrypt GITHUB_TOKEN=<token>
+  - secure: "WEIj/OWqz0mGuAfFFETyu9zVZtlzXb2ACVukhG3kfR6G4ivJZEIkBBS1vHRZbQJ5uySFZBY5EWgy5cbirkUslM2ViArVVDNpxt7HY4hnz4no04MokTPfe6pRxpISYcy2gfsx6kKVh5t52CT3gLQV/P7NYj0j9x+q9MI1bsnx9gZqxcwFWBxQXfcpmzmykpVlvbfZCJYPx99xa5yej09DLKUtDcb9H+F/VyuT0qD4cjkJdgkG1vqFK5tRLKMqDCmil0zC9jro+EUIWJvLM0ytLZFkZTFcboNWnsTBSxO8KF0BiJkXMw03huAn4IVA2PQv/tt7bolMJUQZyNQwLJ3v/zsRr1S5Hdq+AvVvQSjphGL99Z2tHkoXhVvGcQbKWjh2JyWXLjxj07qM6NcmMZvJHhLyNwrd651STHqh0I3tIp8sDw48kxTv1d2pTfZJHm6apvKaOgpYa0SiiF71uECKcH8/BEq+LuCKouHgJfOVS/QNhMARybeMgPYYkw++jgzxPLbG+UXHbwlnTXc59+hfpYE954SCDV9r0KLDTh5X94USC2+U9ZaHoNIknBD33qej97HNOWWofO1/o/wXjZSyvW26S6jKY3XrI+sgd3ddzkVzKWwwbqANc9deQvGppKO9M86/1x3LVItmii/p8tRONjvF5ZpoLdpWZUYHERm5kEk="
+

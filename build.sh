@@ -16,24 +16,6 @@ if [ "$1" == "clean" ]; then
 fi
 
 
-### deploy web version to github pages
-
-if [ "$1" == "deploy" ]; then
- # $2 = premek/forest
-
- cd "target/${P}-web"
- git init
- git config user.name "autodeploy"
- git config user.email "autodeploy"
- touch .
- git add .
- git commit -m "deploy to github pages"
- git push --force --quiet "https://${GH_TOKEN}@github.com/${2}.git" master:gh-pages
-
- exit;
-fi
-
-
 
 ##### build #####
 
