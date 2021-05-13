@@ -1,6 +1,6 @@
 # curl -u premysl.vyhnal@gmail.com   -d '{"scopes":["public_repo"],"note":"XXX token name XXX"}'   https://api.github.com/authorizations
 
-
+dist: focal
 language: bash
 sudo: false
 install: true
