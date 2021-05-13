@@ -3,27 +3,16 @@ on:
     types: [created]
 name: Release
 jobs:
-  checkout:
-    name: Checkout
+  release:
+    name: Relese
     runs-on: ubuntu-latest
     steps:
       - name: Checkout the repository
         uses: actions/checkout@master
-
-  deps:
-    name: Install dependencies
-    runs-on: ubuntu-latest
-    steps:
-      - name: apt
+      - name: Install dependencies apt
         run: sudo apt-get install lua5.1 luarocks npm
-      - name: npm
+      - name: Install dependencies npm
         run: npm i love.js
-        
-  build:
-    needs: [checkout, deps]
-    name: Build
-    runs-on: ubuntu-latest
-    steps:
       - name: Build
         run: ./build.sh web
           
@@ -42,11 +31,7 @@ jobs:
 #         env:
 #           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           
-  pages:
-    needs: [build]
-    name: Deploy web to github pages
-    runs-on: ubuntu-latest
-    steps:
+
       - name: Deploy web to github pages
         with:
           build-dir: target/enjoy-web
