@@ -1,0 +1,55 @@
+on:
+  release:
+    types: [created]
+name: Release
+jobs:
+  checkout:
+    name: Checkout
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the repository
+        uses: actions/checkout@master
+
+  deps:
+    name: Install dependencies
+    runs-on: ubuntu-latest
+    steps:
+      - name: apt
+        run: sudo apt-get install lua5.1 luarocks npm
+      - name: npm
+        run: npm i love.js
+        
+  build:
+    needs: [checkout, deps]
+    name: Build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Build
+        run: ./build.sh web
+          
+  artifacts:
+    needs: [build]
+    name: Upload artifacts to release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Upload artifacts to release
+        uses: Roang-zero1/github-upload-release-artifacts-action@master
+        with:
+          args:
+          - target/enjoy.love
+          - target/enjoy-win.zip
+          - target/enjoy-web.zip
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          
+  pages:
+    needs: [build]
+    name: Deploy web to github pages
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy web to github pages
+        with:
+          build-dir: target/enjoy-web
+          deploy-branch: gh-pages
+        uses:  NickSchimek/deploy_jamstack_action@main
+
