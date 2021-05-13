@@ -4,8 +4,8 @@ set -x
 
 P="enjoy"
 
-LV="0.10.2"
-LZ="https://bitbucket.org/rude/love/downloads/love-${LV}-win32.zip"
+LV="11.3" # TODO take from conf.lua
+LZ="https://github.com/love2d/love/releases/download/${LV}/love-${LV}-win32.zip"
 
 
 ### clean
