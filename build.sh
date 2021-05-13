@@ -48,7 +48,8 @@ cp -r src target
 cd target/src
 
 # compile .ink story into lua table so the runtime will not need lpeg dep.
-lua lib/pink/pink/pink.lua parse game.ink > game.lua
+luarocks install --tree lua_modules lpeg
+LUA_PATH='lua_modules/share/lua/5.1/?.lua;lua_modules/share/lua/5.1/?/init.lua;;' LUA_CPATH='lua_modules/lib/lua/5.1/?.so' lua lib/pink/pink/pink.lua parse game.ink > game.lua
 
 zip -9 -r - . > "../${P}.love"
 cd -
